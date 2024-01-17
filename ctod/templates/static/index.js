@@ -49,7 +49,7 @@ function initializeLayers() {
   const minZoom = urlParams.get("minZoom") || 1;
   const maxZoom = urlParams.get("maxZoom") || 21;
   const cog =
-    urlParams.get("cog") ||
+  urlParams.get("cog") || 
     "./ctod/files/test_cog.tif";
   const skipCache = urlParams.get("skipCache") || false;
   const meshingMethod = urlParams.get("meshingMethod") || "grid";
