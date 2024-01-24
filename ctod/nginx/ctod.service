@@ -1,0 +1,24 @@
+[Unit]
+Description=ctod daemon
+
+[Service]
+
+User=www-data
+Group=www-data
+
+Type=simple
+
+WorkingDirectory=/home/mah/src/ctod/ctod
+
+Environment=CTOD_TILE_CACHE_PATH=/var/cache/ctod_cache
+Environment=CTOD_LOGGING_LEVEL=info  #debug, info, warning, error, critical
+Environment=CTOD_PORT=5002
+Environment=CTOD_IPADDR=127.0.0.1
+
+ExecStart=/home/mah/src/ctod/ctod/venv/bin/python app.py
+
+
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
