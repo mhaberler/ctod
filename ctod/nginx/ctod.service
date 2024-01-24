@@ -1,0 +1,24 @@
+[Unit]
+Description=ctod daemon
+
+[Service]
+
+User=www-data
+Group=www-data
+
+Type=simple
+
+WorkingDirectory=/home/mah/src/ctod/ctod
+
+ExecStart=/home/mah/src/ctod/ctod/venv/bin/python app.py \
+	--tile-cache-path /var/cache/ctod_cache \
+	--logging-level info \
+	--port 5011 \
+	--address 127.0.0.1
+
+
+
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
