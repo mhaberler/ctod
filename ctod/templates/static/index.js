@@ -112,7 +112,7 @@ function configureViewer() {
 }
 
 function setTerrainProvider(minZoom, maxZoom, cog, resamplingMethod, skipCache, meshingMethod) {
-  const terrainProviderUrl = `${window.location.origin}/tiles?minZoom=${minZoom}&maxZoom=${maxZoom}&cog=${cog}&resamplingMethod=${resamplingMethod}&skipCache=${skipCache}&meshingMethod=${meshingMethod}`;
+  const terrainProviderUrl = `${window.location.origin}/ctod/tiles?minZoom=${minZoom}&maxZoom=${maxZoom}&cog=${cog}&resamplingMethod=${resamplingMethod}&skipCache=${skipCache}&meshingMethod=${meshingMethod}`;
 
   terrainProvider = new Cesium.CesiumTerrainProvider({
     url: terrainProviderUrl,
@@ -125,7 +125,7 @@ function setTerrainProvider(minZoom, maxZoom, cog, resamplingMethod, skipCache, 
   // go to cog location
   if (currentCog !== cog) {
     fetch(
-      `${window.location.origin}/tiles/layer.json?maxZoom=${maxZoom}&cog=${cog}`
+      `${window.location.origin}/ctod/tiles/layer.json?maxZoom=${maxZoom}&cog=${cog}`
     )
       .then((response) => response.json())
       .then((layer) => {
