@@ -13,11 +13,13 @@ def main():
     tile_cache_path = _get_value(args.tile_cache_path, os.environ.get('CTOD_TILE_CACHE_PATH', None), None)
     logging_level = _get_value(args.logging_level, os.environ.get('CTOD_LOGGING_LEVEL', 'info'), 'info')
     unsafe = _get_value(args.unsafe, os.environ.get('CTOD_UNSAFE', False), False)
+    ip_address = _get_value(args.address, os.environ.get('CTOD_IPADDR', None), None)
 
     _setup_logging(log_level=getattr(logging, logging_level.upper()))
 
     app = make_server(tile_cache_path, unsafe)
-    app.listen(port)
+    print(ip_address)
+    app.listen(port, ip_address)
     
     _log_ctod_start(port, tile_cache_path)
     tornado.ioloop.IOLoop.current().start()
@@ -34,6 +36,7 @@ def _parse_args():
     parser.add_argument('--logging-level', choices=['debug', 'info', 'warning', 'error', 'critical'],
                         default='info', help="Logging level")
     parser.add_argument('--port', type=int, default=5000, help="Port to run the application on")
+    parser.add_argument('--address', type=str, default=None, help="IP address to listen on (default: wildcard address)")
     parser.add_argument('--unsafe', action='store_true', help='When unsafe all tiles will be loaded, even if there are not enough overviews')
     
     return parser.parse_args()
